@@ -30,11 +30,11 @@ jobs:
         with:
           context: .
           load: true
-          tags: prom-exporter:test
+          tags: json-stats-exporter:test
 
       - name: Test Execution
         run: |
-          timeout 10s docker run --rm prom-exporter:test \
+          timeout 10s docker run --rm json-stats-exporter:test \
             -listen-address ":9201" \
             -service-name "test" -service-uri "test" -service-port "5066" -service-metrics-path "stats" || code=$?
           if [[ $code -ne 124 ]]; then
