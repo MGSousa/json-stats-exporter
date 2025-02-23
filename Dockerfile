@@ -14,6 +14,6 @@ FROM scratch
 
 WORKDIR /app
 
-COPY --from=build /app/dist/prom-exporter_linux_amd64_v1/* ./prom-exporter
+COPY --from=build /app/dist/json-stats-exporter_linux_amd64_v1/* ./json-stats-exporter
 
-ENTRYPOINT [ "./prom-exporter" ]
+ENTRYPOINT [ "./json-stats-exporter" ]

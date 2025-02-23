@@ -1,7 +1,7 @@
 # <img src="https://static-00.iconduck.com/assets.00/prometheus-icon-511x512-1vmxbcxr.png" width="50"/>  JSON Stats Exporter
-[![Release](https://github.com/MGSousa/json-stats-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/MGSousa/json-stats-exporter/actions/workflows/release.yml)
-[![Docker Version](https://img.shields.io/docker/v/mgsousa/json-stats-exporter.svg)](https://hub.docker.com/r/MGSousa/json-stats-exporter/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mgsousa/json-stats-exporter.svg)](https://hub.docker.com/r/MGSousa/json-stats-exporter/)
+
+[![CI](https://github.com/MGSousa/json-stats-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/MGSousa/json-stats-exporter/actions/workflows/release.yml)
+[![Version](https://img.shields.io/github/release/MGSousa/json-stats-exporter.svg?style=flat)]()
 
 Prometheus exporter that scrapes and parses JSON statistics from selected services by converting metrics/stats in Prometheus format, being ready to be scrapped.
 

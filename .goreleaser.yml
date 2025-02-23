@@ -1,4 +1,5 @@
-project_name: prom-exporter
+version: 2
+project_name: json-stats-exporter
 
 builds:
   - env:
