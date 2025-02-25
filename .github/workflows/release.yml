@@ -53,4 +53,4 @@ jobs:
           context: .
           file: Dockerfile.release
           push: true
-          tags: mgsousa/prom-exporter:latest,mgsousa/prom-exporter:${{ steps.prepare.outputs.tag_name }}
+          tags: mgsousa/json-stats-exporter:${{ steps.prepare.outputs.tag_name }},mgsousa/json-stats-exporter:latest

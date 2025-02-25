@@ -10,16 +10,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      http-service:
+        image: hashicorp/http-echo:latest
+        env:
+          ECHO_TEXT: '{"stats":{"events":{"active":0,"added":0,"done":0},"harvester":{"closed":0,"open_files":0,"running":0,"skipped":0,"started":0},"input":{"log":{"files":{"renamed":0,"truncated":0}}}},"processor":{"rate_limit":{"1":{"dropped":0}}},"writes":{"fail":0,"success":0,"total":0},"system":{"cpu":{"cores":4},"load":{"1":0.45,"15":0.21,"5":0.26,"norm":{"1":0.105,"15":0.05,"5":0.065}}}}'
+        ports:
+          - 5678:5678
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Set up Go
-        uses: actions/setup-go@master
-        with:
-          go-version: 1.21.x
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -30,14 +33,13 @@ jobs:
         with:
           context: .
           load: true
-          tags: prom-exporter:test
+          tags: json-stats-exporter:test
 
-      - name: Test Execution
+      - name: Run Service
         run: |
-          timeout 10s docker run --rm prom-exporter:test \
-            -listen-address ":9201" \
-            -service-name "test" -service-uri "test" -service-port "5066" -service-metrics-path "stats" || code=$?
-          if [[ $code -ne 124 ]]; then
-            echo "Exporter stopped with ${code}. It was expected to run forever."
-            exit 1;
-          fi
+          docker run --net=host --rm json-stats-exporter:test \
+            -listen-address ":9201" -service-name "test" \
+            -service-uri "localhost" -service-port "5678" &
+
+          sleep 10
+          curl -sS --fail-with-body --retry 5 localhost:9201/metrics

@@ -1,9 +1,9 @@
-# <img src="https://static-00.iconduck.com/assets.00/prometheus-icon-511x512-1vmxbcxr.png" width="50"/>  Auto Prometheus Exporter
-[![Release](https://github.com/MGSousa/prom-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/MGSousa/prom-exporter/actions/workflows/release.yml)
-[![Docker Version](https://img.shields.io/docker/v/mgsousa/prom-exporter.svg)](https://hub.docker.com/r/MGSousa/prom-exporter/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mgsousa/prom-exporter.svg)](https://hub.docker.com/r/MGSousa/prom-exporter/)
+# <img src="https://static-00.iconduck.com/assets.00/prometheus-icon-511x512-1vmxbcxr.png" width="50"/>  JSON Stats Exporter
 
-Prometheus exporter that fetches and auto-resolves JSON data from selected services by converting metrics/stats in Prometheus format, being ready to be scrapped.
+[![CI](https://github.com/MGSousa/json-stats-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/MGSousa/json-stats-exporter/actions/workflows/release.yml)
+[![Version](https://img.shields.io/github/release/MGSousa/json-stats-exporter.svg?style=flat)]()
+
+Prometheus exporter that scrapes and parses JSON statistics from selected services by converting metrics/stats in Prometheus format, being ready to be scrapped.
 
 Compatible with Elastic Beats plugins (Filebeat, Auditbeat, Packetbeat, Metricbeat, etc.) and any other tool with HTTP endpoint output in JSON.
 
@@ -12,24 +12,24 @@ Compatible with Elastic Beats plugins (Filebeat, Auditbeat, Packetbeat, Metricbe
   - specify version
 ```sh
 VERSION=1.0.0
-wget -nv https://github.com/MGSousa/prom-exporter/releases/download/v$VERSION/prom-exporter_${VERSION}_$(uname | awk '{print tolower($0)}')_amd64 -O prom-exporter && chmod +x prom-exporter
+wget -nv https://github.com/MGSousa/json-stats-exporter/releases/download/v$VERSION/json-stats-exporter_${VERSION}_$(uname | awk '{print tolower($0)}')_amd64 -O json-stats-exporter && chmod +x json-stats-exporter
 ```
 
   - or fetch the latest release
 ```sh
-curl -fsL "https://api.github.com/repos/MGSousa/prom-exporter/releases/latest" |\
+curl -fsL "https://api.github.com/repos/MGSousa/json-stats-exporter/releases/latest" |\
     jq -r ".assets[] | select(.name|contains(\"$(uname | awk '{print tolower($0)}')\")) | .url" |\
-    wget --header="Accept: application/octet-stream" -O prom-exporter -nv -i - && chmod +x prom-exporter
+    wget --header="Accept: application/octet-stream" -O json-stats-exporter -nv -i - && chmod +x json-stats-exporter
 ```
 ### Windows
 ```sh
-curl -o prom-exporter.exe https://github.com/MGSousa/prom-exporter/releases/download/v1.0.0/prom-exporter_1.0.0_windows_amd64.exe
+curl -o json-stats-exporter.exe https://github.com/MGSousa/json-stats-exporter/releases/download/v1.0.0/json-stats-exporter_1.0.0_windows_amd64.exe
 ```
 
 ## Usage
  - About args
 ```sh
-Usage of ./prom-exporter:
+Usage of ./json-stats-exporter:
   -debug
     	Enable debug mode.
   -listen-address string
@@ -114,7 +114,7 @@ services:
 ```
  - Run it via executable
 ```sh
-./prom-exporter -service-name "SERVICE_NAME" -service-uri "REMOTE_HOST" -service-port REMOTE_PORT -service-metrics-path "REMOTE_PATH"
+./json-stats-exporter -service-name "SERVICE_NAME" -service-uri "REMOTE_HOST" -service-port REMOTE_PORT -service-metrics-path "REMOTE_PATH"
 ```
 
 ## TODO
