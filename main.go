@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"main/exporter"
 	"net/http"
 	"os"
 	"strings"
 	"time"
 
+	"github.com/MGSousa/json-stats-exporter/exporter"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/collectors/version"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

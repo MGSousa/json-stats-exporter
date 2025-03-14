@@ -23,5 +23,4 @@ docker_build:
 	@docker build --no-cache -t $(BINARY) .
 
 goreleaser_build:
-	@goreleaser build --rm-dir --single-target --clean --auto-snapshot
-
+	@goreleaser build --single-target --clean --auto-snapshot

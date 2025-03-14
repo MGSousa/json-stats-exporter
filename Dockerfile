@@ -1,19 +1,15 @@
-FROM golang:alpine AS build
+FROM public.ecr.aws/docker/library/golang:alpine3.21 AS builder
 
 WORKDIR /app
+COPY . .
 
-COPY . ./
-
-SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
-
-RUN apk add --no-cache curl git &&\
-  curl -sL https://git.io/goreleaser | /bin/sh -s -- build --snapshot --single-target
-
+RUN go build "--ldflags=-s -w" -o ./json-stats-exporter -v main.go
 
 FROM scratch
 
+LABEL org.opencontainers.image.source="https://github.com/MGSousa/json-stats-exporter"
+
 WORKDIR /app
+COPY --from=builder --chmod=775 /app/json-stats-exporter /bin/
 
-COPY --from=build /app/dist/json-stats-exporter_linux_amd64_v1/* ./json-stats-exporter
-
-ENTRYPOINT [ "./json-stats-exporter" ]
+ENTRYPOINT [ "/bin/json-stats-exporter" ]
