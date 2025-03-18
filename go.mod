@@ -1,4 +1,4 @@
-module main
+module github.com/MGSousa/json-stats-exporter
 
 go 1.21.3
 
