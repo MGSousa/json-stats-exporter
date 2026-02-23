@@ -56,7 +56,7 @@ jobs:
             ghcr.io/mgsousa/json-stats-exporter:latest
 
       - name: Release assets
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v7
         with:
           version: latest
           args: release --clean --timeout=5m
